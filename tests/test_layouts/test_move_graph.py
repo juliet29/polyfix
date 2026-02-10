@@ -1,14 +1,14 @@
 from utils4plans.sets import set_equality
-from polymap import logconf
+from utils4plans import logconfig
 from loguru import logger
 from polymap.examples.layout import smart_graph_example
-from polymap.layout.graph import (
+from polymap.layout.main.plan import (
     create_graph_for_all_surfaces_along_axis,
     create_move_graph,
     Edge,
     EdgeData,
 )
-from polymap.layout.interfaces import create_layout_from_dict
+from polymap.geometry.layout import create_layout_from_dict
 from polymap.visuals.visuals import plot_layout
 
 

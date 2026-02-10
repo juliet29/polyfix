@@ -1,8 +1,8 @@
-from polymap.layout.graph import AxGraph, EdgeDataDiGraph, EdgeData
+from polymap.layout.interfaces import AxGraph, EdgeDataDiGraph, EdgeData
 from loguru import logger
-from polymap import logconf
 import networkx as nx
-from polymap.layout.interfaces import Layout
+from utils4plans.logconfig import logset
+from polymap.geometry.layout import Layout
 
 
 class TestGraph:
@@ -33,6 +33,6 @@ class TestGraph:
 
 
 if __name__ == "__main__":
-    logconf.logset()
+    logset()
     t = TestGraph()
     t.test_components()

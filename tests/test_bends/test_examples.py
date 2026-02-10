@@ -1,13 +1,13 @@
 from loguru import logger
 import pytest
 from utils4plans.geom import CoordsType
-from polymap.bends.b2 import assign_bends
-from polymap.bends.examples import BendExamples
-from polymap.bends.i2 import BendListSummary
-from polymap.bends.iterate2 import iterate_clean_domain
+from polymap.bends.bends import assign_bends
+from polymap.examples.bends import BendExamples
+from polymap.bends.interfaces import BendListSummary
+from polymap.bends.main import remove_all_bends_from_domain
 from polymap.examples.msd import MSDDomain, MSDDomainName
 from polymap.geometry.ortho import FancyOrthoDomain
-from polymap.logconf import logset
+from utils4plans.logconfig import logset
 
 
 def study_make_bends_all():
@@ -30,7 +30,7 @@ def study_one_bend():
 def study_move(coords: CoordsType, dom_name: str):
     dom = FancyOrthoDomain.from_tuple_list(coords, dom_name)
     msd_dom = MSDDomainName(0, dom_name)  # pyright: ignore[reportArgumentType]
-    res = iterate_clean_domain(
+    res = remove_all_bends_from_domain(
         MSDDomain(msd_dom, dom),
         show_failure=True,
         show_complete_iteration=False,  # NOTE: change to true if want to actually see!

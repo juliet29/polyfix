@@ -3,9 +3,10 @@ from typing_extensions import NamedTuple
 from utils4plans.lists import chain_flatten
 from polymap.geometry.ortho import FancyOrthoDomain
 from polymap.paths import static_paths
-from polymap.layout.interfaces import Layout, create_layout_from_json
+from polymap.geometry.layout import Layout, create_layout_from_json
 
 from polymap.paths import DynamicPaths
+
 
 MSD_IDs = Literal[
     "106493",
@@ -30,6 +31,8 @@ MSD_IDs = Literal[
     "71318",
 ]
 
+DEFAULT_MSD: MSD_IDs = "106493"
+
 
 class MSDLayout(NamedTuple):
     layout_id: str | MSD_IDs
@@ -53,7 +56,7 @@ class MSDDomain(NamedTuple):
     domain: FancyOrthoDomain
 
 
-def get_msd_plan():
+def get_oneoff_msd_plan():
     filename = "oneoff/layout"
     res = create_layout_from_json(filename, static_paths.inputs)
     print(res)
@@ -78,7 +81,8 @@ def get_one_msd_layout(id: MSD_IDs | None = None):
         stem = id
         assert stem in stems
     else:
-        stem = stems[0]
+        stem = DEFAULT_MSD
+        assert stem in stems
 
     return stem, create_layout_from_json(stem, source_path)
 
@@ -98,4 +102,4 @@ def get_all_msd_domains():
 
 
 if __name__ == "__main__":
-    get_msd_plan()
+    get_oneoff_msd_plan()

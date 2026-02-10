@@ -1,5 +1,5 @@
 from utils4plans.geom import Coord
-from polymap.interfaces import CoordsType
+from utils4plans.geom import CoordsType
 
 green_north = 3.9
 pink_north = 3.8
@@ -28,6 +28,9 @@ def gen_square(top_left: tuple[float, float], size: int) -> CoordsType:
     bl = (tl.x, tl.y - sz)
 
     order = [tl.as_tuple, tr, br, bl]
+    # logger.debug(f"{tl=}")
+    # logger.debug(f"{size=}")
+    # logger.debug(f"{tr=}")
     return order
 
 

@@ -1,104 +1,78 @@
-from polymap.geometry.ortho import FancyOrthoDomain
-from polymap.geometry.surfaces import Surface
-from polymap.interfaces import CoordsType, CoordsTypeJSON
-
-
-from utils4plans.lists import chain_flatten, get_unique_one
-from utils4plans.sets import set_difference
-from utils4plans.io import read_json
-from pathlib import Path
-from polymap.paths import DynamicPaths
-from typing import TypeVar
-from rich import print
-import json
-
-
+import networkx as nx
+from polymap.geometry.layout import Layout
+from polymap.geometry.vectors import Axes
 from dataclasses import dataclass
+from typing import NamedTuple
 
-T = TypeVar("T")
+GraphPairs = dict[str, list[str]]
 
 
-# # TODO add to utils4plans
-# def set_update(existing: list[T], new: list[T]):
-#     diff = set_difference(existing, new)
-#     return list(set(diff).union(set(new)))
+def collect_nbs(G: nx.DiGraph) -> GraphPairs:
+    nb_dict = {}
+    for e in G.edges:
+        e1, e2 = e
+        if e1 not in nb_dict.keys():
+            nb_dict[e1] = []
+            nb_dict[e1].append(e2)
+        else:
+            nb_dict[e1].append(e2)
+
+    return nb_dict
+
+
+class EdgeData(NamedTuple):
+    delta: float
+    domain_name: str
+
+    def dump(self):
+        return self._asdict()
+
+
+class Edge(NamedTuple):
+    u: str
+    v: str
+    data: EdgeData
+
+    def summary_string(self, short: bool = False):
+        edge = (self.u, self.v)
+        delta = float(f"{self.data.delta:.2f}") if short else self.data.delta
+        s = {edge: delta}
+        return s
+
+
+class EdgeDataDiGraph(nx.DiGraph):
+    def edge_data(self):
+        res = list(self.edges(data=True))
+        return [Edge(i[0], i[1], i[2]["data"]) for i in res]
+
+    def edge_summary_list(self):
+        strs = [e.summary_string() for e in self.edge_data()]
+        return strs
 
 
 @dataclass
-class Layout:
-    domains: list[FancyOrthoDomain]
+class AxGraph:
+    G: EdgeDataDiGraph
+    ax: Axes
+    layout: Layout
 
-    def __post_init__(self):
-        pass
-        # self.domains = list(
-        #     filter(lambda x: "balcony" not in x.name.lower(), self.domains)
-        # )
+    def get_delta(self, nb1: str, nb2: str):
+        for nb in [nb1, nb2]:
+            assert nb in self.G.nodes
 
-    # post init -> assert names are unique!
+        return self.G.edges[(nb1, nb2)]["data"].delta
 
-    # def plot_layout(self):
-    #     polygons = sp.MultiPolygon([i.polygon for i in self.domains])
-    #     plot_polygon(polygons)
-
-    def get_domain(self, name):
-        return get_unique_one(self.domains, lambda x: x.name == name)
-
-    def get_surfaces(self, substantial_only=False):
-        if substantial_only:
-            return chain_flatten([i.substantial_surfaces for i in self.domains])
-        return chain_flatten([i.surfaces for i in self.domains])
-
-    def get_other_surfaces(self, surf: Surface, substantial_only: bool = False):
-        return set_difference(self.get_surfaces(substantial_only), [surf])
-
-    def get_surface_by_name(self, surf_name: str):
-        return get_unique_one(self.get_surfaces(), lambda x: str(x) == surf_name)
+    def get_neighors(self, node: str):
+        return list(self.G.neighbors(node))
 
     @property
-    def surface_summary(self):
-        for d in self.domains:
-            d.summarize_surfaces
-            print("\n")
+    def roots(self):
+        return [n[0] for n in self.G.in_degree if n[1] == 0]
 
     @property
-    def domain_names(self):
-        print([i.name for i in self.domains])
+    def domains(self):
+        return self.layout.domains
 
-    def dump(self, as_string: bool = True):
-        d: dict[str, CoordsTypeJSON] = {d.name: d.dump() for d in self.domains}
-        if as_string:
-            return json.dumps(d)
-        else:
-            return d
-
-    # def update_layout(self, new_domains: list[FancyOrthoDomain]):
-    #     domains_to_replace = [self.get_domain(i.name) for i in new_domains]
-    #     updated_domains = find_and_replace_in_list(
-    #         self.domains, domains_to_replace, new_domains
-    #     )
-    #     return Layout(updated_domains)
-    # updated_domains = set_update(self.domains, new_domains)
-    # return Layout(updated_domains)
-
-
-def create_layout_from_dict(
-    layout: dict[str, CoordsType],
-):  # TODO: CoordsType is a misnomer
-    domains: list[FancyOrthoDomain] = []
-    for k, v in layout.items():
-        domain = FancyOrthoDomain.from_tuple_list(v)
-        domain.set_name(k)
-        domains.append(domain)
-
-    return Layout(domains)
-
-
-def create_layout_from_json(file_name: str, folder_path: Path = DynamicPaths.MSD_PATHS):
-    data: dict[str, CoordsType] = read_json(folder_path, file_name)
-    domains: list[FancyOrthoDomain] = []
-    for k, v in data.items():
-        domain = FancyOrthoDomain.from_tuple_list(v)
-        domain.set_name(k)
-        domains.append(domain)
-
-    return Layout(domains)
+    @property
+    def nb_pairs(self):
+        return collect_nbs(self.G)

@@ -1,13 +1,38 @@
 from loguru import logger
-from polymap.bends.i2 import Bend
 from polymap.geometry.modify.update import Move, update_domain
 from polymap.geometry.modify.validate import InvalidPolygonError
 from polymap.geometry.ortho import FancyOrthoDomain
 from polymap.geometry.surfaces import Surface
-from rich import print
 
 
-TOLERANCE = 0.13  # TODO: make a constant
+from typing import Any, Generator, Callable
+from polymap.config import TOLERANCE
+
+
+def make_repr(fx: Callable[[], Generator[tuple[str, Any]]], obj: object | str):
+    repr_str: list[str] = []
+    append = repr_str.append
+    inp = fx()
+    for arg in inp:
+        key, value = arg
+        append(f"{key}={value}")
+    if isinstance(obj, str):
+        return f"{obj}({'\n '.join(repr_str)})"
+    else:
+        return f"{obj.__class__.__name__}({', '.join(repr_str)})"
+
+
+def make_repr_obj(fx: Callable[[], Generator[tuple[str, Any]]]):
+    inp = fx()
+    d = {}
+    for arg in inp:
+        key, value = arg
+        d[key] = value
+    return d
+    # if isinstance(obj, str):
+    #     return f"{obj}({'\n '.join(repr_str)})"
+    # else:
+    #     return f"{obj.__class__.__name__}({', '.join(repr_str)})"
 
 
 def apply_move(moves: list[Move]) -> FancyOrthoDomain:
@@ -37,9 +62,3 @@ def is_small_surf(surf: Surface, tolerance: float = TOLERANCE):
 def find_small_surfs(domain: FancyOrthoDomain, tolerance: float = TOLERANCE):
     small_surfs = list(filter(lambda x: is_small_surf(x, tolerance), domain.surfaces))
     return small_surfs
-
-
-def show_problem_bends(bends: list[Bend]):
-    logger.info("[bold blue]Problem Bends:")
-    for b in bends:
-        print(str(b))
