@@ -1,4 +1,4 @@
-# polymap
+# polyfix
 
 ### Geometry conventions
 
