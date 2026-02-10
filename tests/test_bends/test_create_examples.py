@@ -1,9 +1,9 @@
 from utils4plans.geom import CoordsType
-from polymap.examples.bends import BendExamples, KappaExamples, PiExamples
+from polyfix.examples.bends import BendExamples, KappaExamples, PiExamples
 import pytest
-from polymap.geometry.modify.validate import validate_polygon
-from polymap.geometry.ortho import FancyOrthoDomain
-from polymap.visuals.visuals import plot_polygon
+from polyfix.geometry.modify.validate import validate_polygon
+from polyfix.geometry.ortho import FancyOrthoDomain
+from polyfix.visuals.visuals import plot_polygon
 
 
 def test_kappa_one():

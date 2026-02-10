@@ -1,4 +1,4 @@
-from polymap.geometry.surfaces import FancyRange
+from polyfix.geometry.surfaces import FancyRange
 import pytest
 
 self = FancyRange(10, 15)

@@ -2,17 +2,17 @@ from loguru import logger
 import pytest
 import shapely
 from utils4plans.logconfig import logset
-from polymap.config import PRECISION
-from polymap.examples.layout import gen_square
-from polymap.examples.msd import DEFAULT_MSD, get_one_msd_layout
-from polymap.geometry.modify.precision import (
+from polyfix.config import PRECISION
+from polyfix.examples.layout import gen_square
+from polyfix.examples.msd import DEFAULT_MSD, get_one_msd_layout
+from polyfix.geometry.modify.precision import (
     decrease_domain_precision,
     decrease_layout_precision,
 )
-from polymap.geometry.ortho import FancyOrthoDomain
-from polymap.geometry.shapely_helpers import decrease_precision
-from polymap.geometry.layout import Layout
-from polymap.visuals.visuals import plot_layout
+from polyfix.geometry.ortho import FancyOrthoDomain
+from polyfix.geometry.shapely_helpers import decrease_precision
+from polyfix.geometry.layout import Layout
+from polyfix.visuals.visuals import plot_layout
 
 
 class TestPrecisionInteraction:

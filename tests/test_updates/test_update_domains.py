@@ -1,9 +1,9 @@
 from typing import NamedTuple
-from polymap.examples.domains import create_ortho_domain
-from polymap.examples.sample_updates import BottomLData
-from polymap.geometry.modify.update import update_domain, InvalidPolygonError, Move
+from polyfix.examples.domains import create_ortho_domain
+from polyfix.examples.sample_updates import BottomLData
+from polyfix.geometry.modify.update import update_domain, InvalidPolygonError, Move
 import pytest
-from polymap.geometry.vectors import CardinalDirections, Direction
+from polyfix.geometry.vectors import CardinalDirections, Direction
 
 
 def try_east0_move():

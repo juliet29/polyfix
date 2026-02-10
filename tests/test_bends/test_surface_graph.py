@@ -1,11 +1,11 @@
 from copy import deepcopy
-from polymap.visuals.visuals import plot_domain_with_surfaces
+from polyfix.visuals.visuals import plot_domain_with_surfaces
 from rich.pretty import pretty_repr
 from utils4plans.sets import set_equality
 import networkx as nx
 
-from polymap.bends.bends import assign_bends, check_is_pi_two, identify_pi_twos
-from polymap.bends.graph import (
+from polyfix.bends.bends import assign_bends, check_is_pi_two, identify_pi_twos
+from polyfix.bends.graph import (
     NodeData,
     create_cycle_graph,
     create_surface_graph_for_domain,
@@ -17,8 +17,8 @@ from polymap.bends.graph import (
 )
 from loguru import logger
 
-from polymap.examples.bends import PiExamples
-from polymap.geometry.ortho import FancyOrthoDomain
+from polyfix.examples.bends import PiExamples
+from polyfix.geometry.ortho import FancyOrthoDomain
 from utils4plans.logconfig import logset
 
 

@@ -2,13 +2,13 @@ from utils4plans.geom import Coord
 import pytest
 import geom
 
-from polymap.examples.sample_updates import BottomLData
-from polymap.geometry.modify.update import (
+from polyfix.examples.sample_updates import BottomLData
+from polyfix.geometry.modify.update import (
     UpdateCoordsInfo,
     create_update_coords_tuple,
     UpdateCoordsTuple,
 )
-from polymap.geometry.paired_coords import PairedCoord
+from polyfix.geometry.paired_coords import PairedCoord
 from rich import print  # type:ignore
 
 PairedCoordUpdateResult = tuple[PairedCoord, PairedCoord, PairedCoord]

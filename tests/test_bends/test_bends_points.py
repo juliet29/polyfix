@@ -1,15 +1,15 @@
 from utils4plans.sets import set_equality
 import pytest
-from polymap.bends.points import (
+from polyfix.bends.points import (
     find_new_surf_for_vector_group,
     find_vector_groups_on_domain,
     fix_vector_group_on_domain,
     heal_extra_points_on_domain,
 )
-from polymap.examples.domains import OrthoNames, create_ortho_domain
+from polyfix.examples.domains import OrthoNames, create_ortho_domain
 from rich import print
 
-from polymap.geometry.modify.update import validate_polygon
+from polyfix.geometry.modify.update import validate_polygon
 
 # TODO: move to tests!
 

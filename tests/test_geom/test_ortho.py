@@ -1,4 +1,4 @@
-from polymap.examples.domains import create_ortho_domain
+from polyfix.examples.domains import create_ortho_domain
 from rich import print
 import geom
 from utils4plans.geom import Coord

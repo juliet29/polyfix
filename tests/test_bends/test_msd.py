@@ -1,10 +1,10 @@
 import pytest
 from typing import get_args
 
-from polymap.bends.main import (
+from polyfix.bends.main import (
     remove_bends_from_layout,
 )
-from polymap.examples.msd import (
+from polyfix.examples.msd import (
     MSD_IDs,
     get_one_msd_layout,
 )

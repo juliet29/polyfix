@@ -1,9 +1,9 @@
-from polymap.examples.domains import ortho_coords
+from polyfix.examples.domains import ortho_coords
 from utils4plans.geom import Coord
-from polymap.geometry.ortho import create_paired_coords
-from polymap.geometry.vectors import CardinalDirections as CD, vector_from_coords
-from polymap.geometry.vectors import Axes
-from polymap.geometry.surfaces import (
+from polyfix.geometry.ortho import create_paired_coords
+from polyfix.geometry.vectors import CardinalDirections as CD, vector_from_coords
+from polyfix.geometry.vectors import Axes
+from polyfix.geometry.surfaces import (
     Surface,
     index_surfaces,
     FancyRange,
@@ -11,7 +11,7 @@ from polymap.geometry.surfaces import (
     coords_to_range,
 )
 import pytest
-from polymap.geometry.paired_coords import PairedCoord
+from polyfix.geometry.paired_coords import PairedCoord
 from utils4plans.sets import set_difference
 
 

@@ -1,8 +1,8 @@
-from polymap.nonortho.interfaces import RotatedLinearGeoms
-from polymap.geometry.vectors import BasisVectors2D as bv
+from polyfix.nonortho.interfaces import RotatedLinearGeoms
+from polyfix.geometry.vectors import BasisVectors2D as bv
 import pytest
 import geom
-from polymap.nonortho.dot import get_aligned_vector
+from polyfix.nonortho.dot import get_aligned_vector
 
 ro = RotatedLinearGeoms.gen()
 

@@ -2,11 +2,11 @@ from loguru import logger
 from utils4plans.sets import set_equality
 from utils4plans import logconfig
 from utils4plans.io import read_json
-from polymap.examples.layout import layout_coords
-from polymap.geometry.layout import create_layout_from_dict
-from polymap.layout.main.plan import create_graph_for_all_surfaces_along_axis
-from polymap.paths import DynamicPaths
-from polymap.pydantic_models import (
+from polyfix.examples.layout import layout_coords
+from polyfix.geometry.layout import create_layout_from_dict
+from polyfix.layout.main.plan import create_graph_for_all_surfaces_along_axis
+from polyfix.paths import DynamicPaths
+from polyfix.pydantic_models import (
     AxGraphModel,
     LayoutModel,
     edge_data_digraph_to_model,

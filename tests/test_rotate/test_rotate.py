@@ -1,5 +1,5 @@
-from polymap.examples.msd import get_oneoff_msd_plan
-from polymap.rotate.main import rotate_layout
+from polyfix.examples.msd import get_oneoff_msd_plan
+from polyfix.rotate.main import rotate_layout
 from math import degrees
 import pytest
 

@@ -1,5 +1,5 @@
 [project]
-name = "polymap"
+name = "polyfix"
 version = "0.1.0"
 description = "Module for creating EnergyPlus ready floor plans from geometry containing holes."
 readme = "README.md"
@@ -32,7 +32,7 @@ dependencies = [
 ]
 
 [project.scripts]
-polymap = "polymap.cli.main:main"
+polyfix = "polyfix.cli.main:main"
 
 [build-system]
 requires = ["uv_build>=0.8.3,<0.9.0"]

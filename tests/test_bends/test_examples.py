@@ -1,12 +1,12 @@
 from loguru import logger
 import pytest
 from utils4plans.geom import CoordsType
-from polymap.bends.bends import assign_bends
-from polymap.examples.bends import BendExamples
-from polymap.bends.interfaces import BendListSummary
-from polymap.bends.main import remove_all_bends_from_domain
-from polymap.examples.msd import MSDDomain, MSDDomainName
-from polymap.geometry.ortho import FancyOrthoDomain
+from polyfix.bends.bends import assign_bends
+from polyfix.examples.bends import BendExamples
+from polyfix.bends.interfaces import BendListSummary
+from polyfix.bends.main import remove_all_bends_from_domain
+from polyfix.examples.msd import MSDDomain, MSDDomainName
+from polyfix.geometry.ortho import FancyOrthoDomain
 from utils4plans.logconfig import logset
 
 
