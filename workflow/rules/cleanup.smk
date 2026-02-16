@@ -7,7 +7,7 @@ rule rotate:
   log:
     "<output_loc>/{sample}/rotate/out.log"
   shell:
-    "uv run polymap make rotate {input} {output} 2>{log}"
+    "uv run polyfix make rotate {input} {output} 2>{log}"
 
 
 rule ortho:
@@ -18,7 +18,7 @@ rule ortho:
   log:
     "<output_loc>/{sample}/ortho/out.log"
   shell:
-    "uv run polymap make ortho {input} {output} 2>{log}"
+    "uv run polyfix make ortho {input} {output} 2>{log}"
 
 
 rule simplify:
@@ -29,7 +29,7 @@ rule simplify:
   log:
     "<output_loc>/{sample}/simplify/out.log"
   shell:
-    "uv run polymap make simplify {input} {output} 2>{log}"
+    "uv run polyfix make simplify {input} {output} 2>{log}"
 
 
 rule xplan:
@@ -42,7 +42,7 @@ rule xplan:
   log:
     "<output_loc>/{sample}/xplan/out.log"
   shell:
-    "uv run polymap make plan {params.ax} {input} {output} 2>{log}"
+    "uv run polyfix make plan {params.ax} {input} {output} 2>{log}"
 
 rule xmove:
   input:
@@ -54,7 +54,7 @@ rule xmove:
   log:
     "<output_loc>/{sample}/xmove/out.log"
   shell:
-    "uv run polymap make move {params.ax} {input} {output} 2>{log}"
+    "uv run polyfix make move {params.ax} {input} {output} 2>{log}"
 
 
 
@@ -69,7 +69,7 @@ rule yplan:
   log:
     "<output_loc>/{sample}/yplan/out.log"
   shell:
-    "uv run polymap make plan {params.ax} {input} {output} 2>{log}"
+    "uv run polyfix make plan {params.ax} {input} {output} 2>{log}"
 
 rule ymove:
   input:
@@ -81,5 +81,5 @@ rule ymove:
   log:
     "<output_loc>/{sample}/ymove/out.log"
   shell:
-    "uv run polymap make move {params.ax} {input} {output} 2>{log}"
+    "uv run polyfix make move {params.ax} {input} {output} 2>{log}"
 
