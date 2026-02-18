@@ -14,7 +14,7 @@ from utils4plans.io import write_json
 
 from polyfix.examples.layout import example_layouts
 from polyfix.geometry.layout import create_layout_from_dict
-from polyfix.paths import DynamicPaths
+from polyfix.examples.paths import ExamplePaths
 
 
 studies_app = App(name="studies")
@@ -24,7 +24,7 @@ studies_app = App(name="studies")
 def generate_examples():
     for ix, coords in enumerate(example_layouts):
         layout = create_layout_from_dict(coords)
-        path = DynamicPaths.example_paths / f"{1000 + ix}.json"
+        path = ExamplePaths.example_paths / f"{1000 + ix}.json"
         write_json(layout, path)
 
 

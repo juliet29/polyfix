@@ -6,14 +6,14 @@ from polyfix.geometry.modify.validate import (
     validate_layout_no_holes,
 )
 from polyfix.pydantic_models import read_layout_from_path
-from polyfix.paths import DynamicPaths
+from polyfix.examples.paths import ExamplePaths
 
 
 class StudyValidation:
     bad_case = "71308"
     good_case = "27540"
     ymove = "ymove/out.json"
-    path = DynamicPaths.msd_outputs / bad_case / ymove
+    path = ExamplePaths.msd_outputs / bad_case / ymove
 
     @property
     def layout(self):

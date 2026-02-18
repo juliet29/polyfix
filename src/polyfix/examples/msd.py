@@ -5,7 +5,7 @@ from polyfix.geometry.ortho import FancyOrthoDomain
 from polyfix.paths import static_paths
 from polyfix.geometry.layout import Layout, create_layout_from_json
 
-from polyfix.paths import DynamicPaths
+from polyfix.examples.paths import ExamplePaths
 
 
 MSD_IDs = Literal[
@@ -64,7 +64,7 @@ def get_oneoff_msd_plan():
 
 
 def get_all_msd_layouts():
-    source_path = DynamicPaths.MSD_PATHS
+    source_path = ExamplePaths.MSD_PATHS
     paths = sorted([i for i in source_path.iterdir()])
     layouts = {
         path.stem: create_layout_from_json(path.stem, source_path) for path in paths
@@ -73,7 +73,7 @@ def get_all_msd_layouts():
 
 
 def get_one_msd_layout(id: MSD_IDs | None = None):
-    source_path = DynamicPaths.MSD_PATHS
+    source_path = ExamplePaths.MSD_PATHS
 
     stems = sorted([i.stem for i in source_path.iterdir()])
 

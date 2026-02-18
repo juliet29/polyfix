@@ -5,7 +5,7 @@ from utils4plans.io import read_json
 from polyfix.examples.layout import layout_coords
 from polyfix.geometry.layout import create_layout_from_dict
 from polyfix.layout.main.plan import create_graph_for_all_surfaces_along_axis
-from polyfix.paths import DynamicPaths
+from polyfix.examples.paths import ExamplePaths
 from polyfix.pydantic_models import (
     AxGraphModel,
     LayoutModel,
@@ -45,7 +45,7 @@ class TestPydanticModels:
 
 def test_layout_roundtrip():
     # test that can read layout from a file
-    path = DynamicPaths.example_paths / "1000.json"
+    path = ExamplePaths.example_paths / "1000.json"
     data = read_json(path)
     logger.debug(data)
     layout_model = LayoutModel.model_validate(data)
