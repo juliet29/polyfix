@@ -1,5 +1,5 @@
 from polyfix.bends.bends import assign_bends
-from polyfix.examples.msd import MSDDomain, MSDDomainName
+from polyfix.msd_interfaces import MSDDomain, MSDDomainName
 from polyfix.geometry.ortho import FancyOrthoDomain
 
 from polyfix.bends.utils import (

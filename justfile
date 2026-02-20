@@ -30,3 +30,4 @@ publish-tag end:
 
   git tag -a v0.0.{{end}} -m v0.0.{{end}}
   git push --tag
+  gh run watch

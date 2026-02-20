@@ -1,15 +1,12 @@
 import re
 from pathlib import Path
 
-from cyclopts import App
 from matplotlib.figure import Figure
 
 from polyfix.geometry.layout import Layout
 from polyfix.visuals.visuals import plot_layout_alone
 
 # TODO: clean up imports to clean up project structure
-
-app = App()
 
 
 def get_case_name(path: Path):

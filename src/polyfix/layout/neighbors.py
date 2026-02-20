@@ -4,10 +4,8 @@ from pipe import where
 
 from utils4plans.lists import chain_flatten, sort_and_group_objects
 
-from polyfix.examples.layout import layout_coords as sample_layout
 from polyfix.geometry.surfaces import Surface, FancyRange
 from polyfix.geometry.ortho import FancyOrthoDomain
-from polyfix.geometry.layout import create_layout_from_dict
 from polyfix.geometry.layout import Layout
 
 
@@ -131,8 +129,8 @@ def get_nbs_for_surf(layout: Layout, surf: Surface):
     return true_nbs
 
 
-if __name__ == "__main__":
-    layout = create_layout_from_dict(sample_layout)
-    surf = layout.get_domain("red").get_surface("south", 1)
-    os = get_candidate_surface_neighbors(layout, surf)
-    # filter_candidate_neighbors(layout, surf, os)
+# if __name__ == "__main__":
+#     layout = create_layout_from_dict(sample_layout)
+#     surf = layout.get_domain("red").get_surface("south", 1)
+#     os = get_candidate_surface_neighbors(layout, surf)
+#     # filter_candidate_neighbors(layout, surf, os)

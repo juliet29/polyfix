@@ -1,59 +1,16 @@
-from typing import Literal, get_args
-from typing_extensions import NamedTuple
+from typing import get_args
 from utils4plans.lists import chain_flatten
-from polyfix.geometry.ortho import FancyOrthoDomain
 from polyfix.paths import static_paths
 from polyfix.geometry.layout import Layout, create_layout_from_json
 
 from polyfix.examples.paths import ExamplePaths
-
-
-MSD_IDs = Literal[
-    "106493",
-    "146903",
-    "146915",
-    "146965",
-    "19792",
-    "22940",
-    "27540",
-    "48204",
-    "48205",
-    "49943",
-    "56958",
-    "57231",
-    "58613",
-    "60529",
-    "60532",
-    "60553",
-    "67372",
-    "67408",
-    "71308",
-    "71318",
-]
-
-DEFAULT_MSD: MSD_IDs = "106493"
-
-
-class MSDLayout(NamedTuple):
-    layout_id: str | MSD_IDs
-    layout: Layout
-
-
-class MSDDomainName(NamedTuple):
-    layout_id: str | MSD_IDs
-    domain_name: str
-
-    def __repr__(self) -> str:
-        return f"({self.layout_id}, {self.domain_name})"
-
-    @property
-    def display_name(self):
-        return self.__repr__()
-
-
-class MSDDomain(NamedTuple):
-    name: MSDDomainName
-    domain: FancyOrthoDomain
+from polyfix.msd_interfaces import (
+    MSD_IDs,
+    MSDDomain,
+    MSDLayout,
+    MSDDomainName,
+    DEFAULT_MSD,
+)
 
 
 def get_oneoff_msd_plan():
