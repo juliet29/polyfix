@@ -1,6 +1,6 @@
 [project]
 name = "polyfix"
-version = "0.1.8"
+version = "0.1.9"
 description = "Module for creating EnergyPlus ready floor plans from geometry containing holes."
 readme = "README.md"
 authors = [
