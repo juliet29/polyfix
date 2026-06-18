@@ -28,6 +28,6 @@ publish-tag end:
   @echo "Have you pushed the code with this new version number?" 
   @read status;
 
-  git tag -a v0.0.{{end}} -m v0.0.{{end}}
+  git tag -a v0.1.{{end}} -m v0.1.{{end}}
   git push --tag
   gh run watch

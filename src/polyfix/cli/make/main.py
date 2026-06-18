@@ -71,7 +71,7 @@ def simplify(path: Path, out_path: Path):
         )
     layout = decrease_layout_precision(layout)
     save_layout_figure(layout, out_path, "Simplified", show_surfaces_labels=True)
-    write_json(layout_to_model(layout).model_dump(), out_path)
+    write_json(layout_to_model(layout).model_dump(), out_path, OVERWRITE=True)
 
 
 @make_app.command()
