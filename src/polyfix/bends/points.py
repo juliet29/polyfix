@@ -1,16 +1,16 @@
+from itertools import groupby
 from typing import Any, NamedTuple
-from loguru import logger
+
 import shapely as sp
-from utils4plans.geom import tuple_list_from_list_of_coords
+from loguru import logger
+from rich import print
+from utils4plans.geom import CoordsList
+
 from polyfix.geometry.modify.validate import validate_polygon
 from polyfix.geometry.ortho import FancyOrthoDomain
-from itertools import groupby
-
+from polyfix.geometry.paired_coords import PairedCoord, coords_from_paired_coords_list
 from polyfix.geometry.surfaces import Surface, create_surface
 from polyfix.geometry.vectors import vector_from_coords
-from polyfix.geometry.paired_coords import PairedCoord, coords_from_paired_coords_list
-from rich import print
-
 
 DEBUG = False
 
@@ -69,7 +69,7 @@ def fix_vector_group_on_domain(domain: FancyOrthoDomain, surfs: list[Surface]):
 
     new_coords = coords_from_paired_coords_list([i.coords for i in new_surfs])
 
-    test_poly = sp.Polygon(tuple_list_from_list_of_coords(new_coords))
+    test_poly = sp.Polygon(CoordsList(new_coords).tuple_list)
     validate_polygon(test_poly, domain.name)
 
     dom = FancyOrthoDomain(new_coords, domain.name)

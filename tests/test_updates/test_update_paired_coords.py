@@ -127,8 +127,3 @@ class TestUpdatingPairedCoords(BottomLData):
         target = self.south_0.coords
         with pytest.raises(AssertionError):
             create_update_coords_tuple(self.paired_coords, target, v)
-
-
-if __name__ == "__main__":
-    t = TestUpdatingPairedCoords()
-    t.test_moving_west0_in()

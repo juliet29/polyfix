@@ -68,7 +68,3 @@ def test_extra_points():
     domain = create_ortho_domain("SQUARE_EXTRA_NORTH_WEST")
     with pytest.raises(Exception):
         heal_extra_points_on_domain(domain)
-
-
-if __name__ == "__main__":
-    test_remove_extra_point_from_domain()

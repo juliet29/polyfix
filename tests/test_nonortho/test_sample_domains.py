@@ -4,7 +4,6 @@ from rich.pretty import pretty_repr
 from polyfix.examples.domains import create_ortho_domain
 from polyfix.geometry.modify.validate import InvalidPolygonError
 from polyfix.geometry.ortho import FancyOrthoDomain
-from utils4plans.logconfig import logset
 from polyfix.nonortho.main import orthogonalize_dom
 from polyfix.visuals.visuals import plot_polygon
 
@@ -45,9 +44,3 @@ class TestAlignSkewedDomains:
         dom = self.square_tri
         with pytest.raises(InvalidPolygonError):
             res = orthogonalize_dom(dom)
-
-
-if __name__ == "__main__":
-    logset()
-    t = TestAlignSkewedDomains()
-    t.try_align(t.square_tri)

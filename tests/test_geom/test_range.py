@@ -36,7 +36,3 @@ contains_cases: list[tuple[FancyRange, bool]] = [
 @pytest.mark.parametrize("other, contains", contains_cases)
 def test_contains(other, contains):
     assert contains == self.contains(other)
-
-
-if __name__ == "__main__":
-    print(coincident_small.contains(small))

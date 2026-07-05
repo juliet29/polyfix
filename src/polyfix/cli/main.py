@@ -1,7 +1,8 @@
 from cyclopts import App
-from utils4plans import logconfig
+from utils4plans.logs import logset
 
 from polyfix.cli.make.main import make_app
+from polyfix.cli.studies.main import studies_app
 
 # from polyfix.cli.studies.main import studies_app
 
@@ -9,7 +10,7 @@ from polyfix.cli.make.main import make_app
 
 app = App()
 app.command(make_app)
-# app.command(studies_app)
+app.command(studies_app)
 
 
 @app.command()
@@ -18,7 +19,7 @@ def welcome():
 
 
 def main():
-    logconfig.logset(to_stderr=True)
+    logset(to_stderr=True)
     app()
 
 

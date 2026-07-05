@@ -55,7 +55,3 @@ def test_moves_on_square(drn: Direction, compare_move: CompareMove):
     new_domain = update_domain(move)
     new_surf = new_domain.get_surface(drn.name)
     assert new_surf.location == new_loc
-
-
-if __name__ == "__main__":
-    d = try_east0_move()

@@ -1,14 +1,14 @@
 from pathlib import Path
+
 import networkx as nx
 from pydantic import BaseModel, RootModel
-from utils4plans.geom import coords_type_list_to_coords
-from polyfix.geometry.ortho import FancyOrthoDomain
-from polyfix.geometry.vectors import Axes
-from utils4plans.geom import CoordsType
+from utils4plans.geom import CoordsList, CoordsType
 from utils4plans.io import read_json, write_json
 
-from polyfix.layout.interfaces import AxGraph, EdgeData, EdgeDataDiGraph
 from polyfix.geometry.layout import Layout
+from polyfix.geometry.ortho import FancyOrthoDomain
+from polyfix.geometry.vectors import Axes
+from polyfix.layout.interfaces import AxGraph, EdgeData, EdgeDataDiGraph
 
 
 #  ------- Layout ---------
@@ -17,7 +17,7 @@ class LayoutModel(RootModel):
 
     def to_layout(self):
         domains = [
-            FancyOrthoDomain(coords_type_list_to_coords(v), k)
+            FancyOrthoDomain(CoordsList.create(v).coords, k)
             for k, v in self.root.items()
         ]
         return Layout(domains)
@@ -35,7 +35,7 @@ def read_layout_from_path(path: Path):
 
 
 def write_layout(layout: Layout, path: Path):
-    write_json(layout_to_model(layout).model_dump(), path, OVERWRITE=True)
+    write_json(layout_to_model(layout).model_dump(), path)
 
 
 # ------ NetworkX Graph -----------

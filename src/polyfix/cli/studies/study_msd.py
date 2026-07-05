@@ -3,21 +3,21 @@ from typing import NamedTuple, get_args
 
 from loguru import logger
 from rich.pretty import pretty_repr
-from utils4plans import logconfig
+
 from polyfix.bends.bends import assign_bends
 from polyfix.bends.interfaces import Bend, BendListSummary, BendNames, DomainSummary
 from polyfix.bends.main import (
     DomainCleanIterationFailure,
-    remove_bends_from_layout,
     remove_all_bends_from_domain,
+    remove_bends_from_layout,
 )
+from polyfix.bends.utils import make_repr
 from polyfix.examples.msd import (
     MSDDomain,
     MSDDomainName,
     get_all_msd_domains,
     get_msd_layouts_as_objects,
 )
-from polyfix.bends.utils import make_repr
 from polyfix.visuals.visuals import plot_domain_with_surfaces, plot_layout_comparison
 
 
@@ -85,8 +85,9 @@ class StudyMSDBends:
 
     def study_failing_bends(self, type_: BendNames):
         di = filter(
-            lambda x: x.bend_summary[type_].size > 0
-            and x.bend_summary[type_].n_failing > 0,
+            lambda x: (
+                x.bend_summary[type_].size > 0 and x.bend_summary[type_].n_failing > 0
+            ),
             self.data,
         )
         return di
@@ -167,11 +168,11 @@ class StudyMSDLayouts:
         logger.success(tracker)
 
 
-if __name__ == "__main__":
-    logconfig.logset(debug_level="SUCCESS")
-    # s = StudyMSDBends()
-    # s.study_moves_all_domain()
-    # s.summarize_failing("pi3s")
-
-    s = StudyMSDLayouts()
-    s.study_all(lim=2)
+# if __name__ == "__main__":
+#     logconfig.logset(debug_level="SUCCESS")
+#     # s = StudyMSDBends()
+#     # s.study_moves_all_domain()
+#     # s.summarize_failing("pi3s")
+#
+#     s = StudyMSDLayouts()
+#     s.study_all(lim=2)

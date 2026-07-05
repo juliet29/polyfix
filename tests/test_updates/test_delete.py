@@ -30,7 +30,3 @@ def test_delete_on_square_with_north_inner():
     # delete = Delete(pcs, surface)
     # new_coords = delete_paired_coords(delete)
     # assert len(new_coords) == len(pcs) - 1
-
-
-if __name__ == "__main__":
-    test_delete_on_square_with_north_inner()

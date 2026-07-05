@@ -18,7 +18,3 @@ def test_rotate_oneoff_layout():
         layout
     )  # TODO: figure why getting divide by 0 warning here.. .
     assert degrees(angle) == 0
-
-
-if __name__ == "__main__":
-    pass

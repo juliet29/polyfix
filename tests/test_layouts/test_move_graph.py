@@ -1,14 +1,14 @@
-from utils4plans.sets import set_equality
-from utils4plans import logconfig
 from loguru import logger
+from utils4plans.sets import set_equality
+
 from polyfix.examples.layout import smart_graph_example
+from polyfix.geometry.layout import create_layout_from_dict
 from polyfix.layout.main.plan import (
-    create_graph_for_all_surfaces_along_axis,
-    create_move_graph,
     Edge,
     EdgeData,
+    create_graph_for_all_surfaces_along_axis,
+    create_move_graph,
 )
-from polyfix.geometry.layout import create_layout_from_dict
 from polyfix.visuals.visuals import plot_layout
 
 
@@ -32,9 +32,3 @@ class TestSmartGraph:
         ]
         logger.info(G2.edge_data())
         assert set_equality(expected, G2.edge_data())
-
-
-if __name__ == "__main__":
-    logconf.logset()
-    t = TestSmartGraph()
-    t.test_smart_graph()

@@ -10,11 +10,10 @@ from polyfix.pydantic_models import AxGraphModel
 from polyfix.layout.main.move import try_moves
 
 
-from utils4plans.io import write_json
-
 from polyfix.examples.layout import example_layouts
 from polyfix.geometry.layout import create_layout_from_dict
 from polyfix.examples.paths import ExamplePaths
+from polyfix.pydantic_models import write_layout
 
 
 studies_app = App(name="studies")
@@ -25,7 +24,7 @@ def generate_examples():
     for ix, coords in enumerate(example_layouts):
         layout = create_layout_from_dict(coords)
         path = ExamplePaths.example_paths / f"{1000 + ix}.json"
-        write_json(layout, path)
+        write_layout(layout, path)
 
 
 @studies_app.command()

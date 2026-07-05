@@ -22,10 +22,3 @@ ke = KappaExamples()
 def test_coords(coords: CoordsType):
     dom = FancyOrthoDomain.from_tuple_list(coords)
     validate_polygon(dom.polygon, "")
-
-
-if __name__ == "__main__":
-    be = BendExamples()
-    dom = FancyOrthoDomain.from_tuple_list(be.kappa.two_in)
-    validate_polygon(dom.polygon, "")
-    plot_polygon(dom.polygon, show=True)

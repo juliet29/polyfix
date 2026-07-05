@@ -1,6 +1,5 @@
 from loguru import logger
 from utils4plans.sets import set_equality
-from utils4plans import logconfig
 from utils4plans.io import read_json
 from polyfix.examples.layout import layout_coords
 from polyfix.geometry.layout import create_layout_from_dict
@@ -53,8 +52,3 @@ def test_layout_roundtrip():
 
     true_layout = layout_model.to_layout()
     assert set_equality([i.name for i in true_layout.domains], data.keys())
-
-
-if __name__ == "__main__":
-    logconfig.logset()
-    t = TestPydanticModels()

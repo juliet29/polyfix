@@ -1,9 +1,17 @@
 from copy import deepcopy
-import shapely as sp
 from typing import NamedTuple
-from utils4plans.geom import Coord, tuple_list_from_list_of_coords
+
+import geom
+import shapely as sp
+from utils4plans.geom import Coord, CoordsList
 from utils4plans.lists import get_unique_items_in_list_keep_order
+
+from polyfix.geometry.modify.validate import InvalidPolygonError, validate_polygon
 from polyfix.geometry.ortho import FancyOrthoDomain
+from polyfix.geometry.paired_coords import (
+    PairedCoord,
+    coords_from_paired_coords_list,
+)
 from polyfix.geometry.shapely_helpers import get_coords_from_shapely_polygon
 from polyfix.geometry.surfaces import Surface
 from polyfix.geometry.vectors import (
@@ -13,12 +21,6 @@ from polyfix.geometry.vectors import (
     vector_as_coord,
     vector_from_coords,
 )
-from polyfix.geometry.paired_coords import (
-    PairedCoord,
-    coords_from_paired_coords_list,
-)
-import geom
-from polyfix.geometry.modify.validate import InvalidPolygonError, validate_polygon
 
 
 class Move(NamedTuple):
@@ -129,7 +131,7 @@ def update_domain(move: Move):
 
     non_zero_paired_coords = remove_zero_vector_coords(updated_paired_coords)
     coords = coords_from_paired_coords_list(non_zero_paired_coords)
-    new_coords = tuple_list_from_list_of_coords(coords)
+    new_coords = CoordsList(coords).tuple_list
 
     # NOTE: this is a change to accomadate bends, may mess with the larger matching algo 25/12/10
     unique_coords = get_unique_items_in_list_keep_order(new_coords)

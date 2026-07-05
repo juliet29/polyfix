@@ -19,7 +19,6 @@ from loguru import logger
 
 from polyfix.examples.bends import PiExamples
 from polyfix.geometry.ortho import FancyOrthoDomain
-from utils4plans.logconfig import logset
 
 
 def test_create_cycle_graph():
@@ -145,13 +144,3 @@ class TestPi2Identify:
         assert len(bends) == 1
         # for b in bends:
         #     logger.info(b.surface_names)
-
-
-if __name__ == "__main__":
-    logset()
-    t = TestPi2Identify()
-    t.show_domain()
-    t.print_graph()
-    t.test_check_of_pi_two()
-    # t.print_graph()
-    # t.test_check_of_pi_two()

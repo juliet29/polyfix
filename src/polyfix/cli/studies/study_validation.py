@@ -1,12 +1,12 @@
 # validation
 
 from loguru import logger
-from utils4plans import logconfig
+
+from polyfix.examples.paths import ExamplePaths
 from polyfix.geometry.modify.validate import (
     validate_layout_no_holes,
 )
 from polyfix.pydantic_models import read_layout_from_path
-from polyfix.examples.paths import ExamplePaths
 
 
 class StudyValidation:
@@ -25,9 +25,3 @@ class StudyValidation:
 
     # def try_validate_no_overlaps(self):
     #     validate_layout_domain(self.layout)
-
-
-if __name__ == "__main__":
-
-    logconfig.logset()
-    s = StudyValidation()

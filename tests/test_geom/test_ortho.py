@@ -58,9 +58,3 @@ def test_is_not_orthogonal():
     d = create_ortho_domain("NON_ORTHO")
     # with pytest.raises(AssertionError):
     assert not d.is_orthogonal
-
-
-if __name__ == "__main__":
-    domain = create_ortho_domain()
-    print(domain.vectors)
-    print(domain.is_orthogonal)

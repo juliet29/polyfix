@@ -1,7 +1,6 @@
 from loguru import logger
 import pytest
 import shapely
-from utils4plans.logconfig import logset
 from polyfix.config import PRECISION
 from polyfix.examples.layout import gen_square
 from polyfix.examples.msd import DEFAULT_MSD, get_one_msd_layout
@@ -87,10 +86,3 @@ class TestPrecisionLayout:
         pass
 
     # TODO -> test on more difficult layoiut
-
-
-if __name__ == "__main__":
-    logset()
-    t = TestPrecisionLayout()
-    t.test_decrease_prec()
-    # t.test_decrease_precision()

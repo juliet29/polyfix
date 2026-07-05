@@ -1,13 +1,13 @@
-from loguru import logger
 import pytest
+from loguru import logger
 from utils4plans.geom import CoordsType
+
 from polyfix.bends.bends import assign_bends
-from polyfix.examples.bends import BendExamples
 from polyfix.bends.interfaces import BendListSummary
 from polyfix.bends.main import remove_all_bends_from_domain
-from polyfix.msd_interfaces import MSDDomain, MSDDomainName
+from polyfix.examples.bends import BendExamples
 from polyfix.geometry.ortho import FancyOrthoDomain
-from utils4plans.logconfig import logset
+from polyfix.msd_interfaces import MSDDomain, MSDDomainName
 
 
 def study_make_bends_all():
@@ -81,9 +81,3 @@ class TestBendExamples:
         assert isinstance(res, BendListSummary)
 
         assert res.n_passing == 1
-
-
-if __name__ == "__main__":
-    logset()
-    t = TestBendMoves()
-    t.test_kappa2out()

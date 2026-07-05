@@ -1,21 +1,22 @@
 from typing import get_args
+
 from utils4plans.lists import chain_flatten
-from polyfix.paths import static_paths
-from polyfix.geometry.layout import Layout, create_layout_from_json
 
 from polyfix.examples.paths import ExamplePaths
+from polyfix.geometry.layout import Layout, create_layout_from_json
 from polyfix.msd_interfaces import (
+    DEFAULT_MSD,
     MSD_IDs,
     MSDDomain,
-    MSDLayout,
     MSDDomainName,
-    DEFAULT_MSD,
+    MSDLayout,
 )
+from polyfix.paths import StaticPaths
 
 
 def get_oneoff_msd_plan():
     filename = "oneoff/layout"
-    res = create_layout_from_json(filename, static_paths.inputs)
+    res = create_layout_from_json(filename, StaticPaths.inputs)
     print(res)
     return res
 

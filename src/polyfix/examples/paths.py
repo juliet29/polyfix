@@ -1,7 +1,7 @@
-from polyfix.paths import static_paths
+from polyfix.paths import StaticPaths
 
 
 class ExamplePaths:
-    MSD_PATHS = static_paths.inputs / "msd"
-    example_paths = static_paths.inputs / "examples"
-    msd_outputs = static_paths.temp / "msd"
+    MSD_PATHS = StaticPaths.inputs / "msd"
+    example_paths = StaticPaths.inputs / "examples"
+    msd_outputs = StaticPaths.temp / "msd"

@@ -1,9 +1,8 @@
+from typing import TypeVar
+
 from loguru import logger
 from utils4plans.lists import chain_flatten
 from utils4plans.sets import set_equality
-from typing import TypeVar
-
-from utils4plans import logconfig
 
 T = TypeVar("T")
 
@@ -30,8 +29,3 @@ def test_generate_nb_comparisons():
     out = generate_comparisons(lst)
     logger.info(out)
     assert set_equality(expected, out)
-
-
-if __name__ == "__main__":
-    logconf.logset()
-    test_generate_nb_comparisons()

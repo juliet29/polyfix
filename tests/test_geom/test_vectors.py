@@ -83,7 +83,3 @@ def test_positive_vector():
 #     new = geom.Vector([3, 2, 0])
 
 #     print(e2.cross(new))
-
-
-if __name__ == "__main__":
-    compute_outward_normal_assuming_cw(e0)

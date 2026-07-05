@@ -1,17 +1,15 @@
-from polyfix.geometry.ortho import FancyOrthoDomain
-from polyfix.geometry.surfaces import Surface
-from utils4plans.geom import CoordsType
-
-
-from utils4plans.lists import chain_flatten, get_unique_one
-from utils4plans.sets import set_difference
-from utils4plans.io import read_json
+from dataclasses import dataclass
 from pathlib import Path
 from typing import TypeVar
+
 from rich import print
+from utils4plans.geom import CoordsType
+from utils4plans.io import read_json
+from utils4plans.lists import chain_flatten, get_unique_one
+from utils4plans.sets import set_difference
 
-
-from dataclasses import dataclass
+from polyfix.geometry.ortho import FancyOrthoDomain
+from polyfix.geometry.surfaces import Surface
 
 T = TypeVar("T")
 
@@ -58,7 +56,7 @@ def create_layout_from_dict(
 
 
 def create_layout_from_json(file_name: str, folder_path: Path):
-    data: dict[str, CoordsType] = read_json(folder_path, file_name)
+    data: dict[str, CoordsType] = read_json(folder_path / f"{file_name}.json")
     domains: list[FancyOrthoDomain] = []
     for k, v in data.items():
         domain = FancyOrthoDomain.from_tuple_list(v)

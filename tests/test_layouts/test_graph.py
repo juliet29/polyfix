@@ -1,8 +1,8 @@
-from polyfix.layout.interfaces import AxGraph, EdgeDataDiGraph, EdgeData
-from loguru import logger
 import networkx as nx
-from utils4plans.logconfig import logset
+from loguru import logger
+
 from polyfix.geometry.layout import Layout
+from polyfix.layout.interfaces import AxGraph, EdgeData, EdgeDataDiGraph
 
 
 class TestGraph:
@@ -30,9 +30,3 @@ class TestGraph:
 
         logger.info(list(components))
         pass
-
-
-if __name__ == "__main__":
-    logset()
-    t = TestGraph()
-    t.test_components()

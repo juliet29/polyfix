@@ -70,7 +70,3 @@ def test_coords_set():
     all_surfs = surfs + [new_surf]
     res = set_difference(all_surfs, [new_surf])
     assert len(res) == len(surfs)
-
-
-if __name__ == "__main__":
-    test_coords_set()
