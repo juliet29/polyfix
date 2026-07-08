@@ -1,18 +1,19 @@
-from loguru import logger
 import networkx as nx
+from loguru import logger
+from pipe import sort, where
 from rich.pretty import pretty_repr
 from utils4plans.lists import chain_flatten
-from utils4plans.sets import set_difference
-from polyfix.geometry.surfaces import Surface
-from polyfix.geometry.surfaces import FancyRange
+
 from polyfix.geometry.layout import Layout
-from polyfix.layout.neighbors import get_nbs_for_surf
+from polyfix.geometry.paired_coords import PairedCoord
+from polyfix.geometry.surfaces import FancyRange, Surface
 from polyfix.geometry.vectors import Axes
-from pipe import where, sort
-from polyfix.layout.interfaces import Edge, EdgeData, EdgeDataDiGraph, AxGraph
+from polyfix.layout.interfaces import AxGraph, Edge, EdgeData, EdgeDataDiGraph
+from polyfix.layout.neighbors import get_nbs_for_surf
 
 
 def compute_delta_between_surfs(s1: Surface, s2: Surface):
+    # TODO: feels like it should be a method on surface..
     delta = FancyRange(s1.location, s2.location).size
     return delta
 
@@ -32,39 +33,6 @@ def create_graph_for_surface(
     return G
 
 
-def create_move_graph(layout: Layout, G: EdgeDataDiGraph):
-    def transform(e: Edge):
-        new_delta = -1 * (e.data.delta - min_edge.data.delta)
-        new_domain = layout.get_surface_by_name(e.v).domain_name
-
-        new_data = EdgeData(delta=new_delta, domain_name=new_domain)
-        new_edge = Edge(e.v, e.u, new_data)
-        return new_edge
-
-    if len(G.edges) <= 1:
-        return G
-
-    # all the deltas are the same -> just need to move one..
-    deltas = [i.data.delta for i in G.edge_data()]
-    if len(set(deltas)) == 1:
-        new_G = EdgeDataDiGraph()
-        e = G.edge_data()[0]
-        new_G.add_edge(e.u, e.v, data=e.data)
-        return new_G
-
-    min_edge = sorted(G.edge_data(), key=lambda x: x.data.delta)[0]
-    other_edges = set_difference(G.edge_data(), [min_edge])
-    new_edges = [transform(e) for e in other_edges] + [min_edge]
-
-    new_G = EdgeDataDiGraph()
-    for e in new_edges:
-        if abs(e.data.delta) > 0:
-            new_G.add_edge(e.u, e.v, data=e.data)
-    # logger.info(pretty_repr(new_G.edge_data()))
-
-    return new_G
-
-
 def create_individual_graphs(layout: Layout, axis: Axes):
     surfaces = list(
         layout.get_surfaces(substantial_only=True)
@@ -78,10 +46,38 @@ def create_individual_graphs(layout: Layout, axis: Axes):
 
 
 def create_graph_for_all_surfaces_along_axis(layout: Layout, axis: Axes):
+    # TODO: this is duplicated below, and appears to only exist for testing -> fix!
     graphs = create_individual_graphs(layout, axis)
 
     G = nx.compose_all(graphs)
     return AxGraph(G, axis, layout)
+
+
+def filter_intersections(Gax: AxGraph):
+    # TODO: this may have to live somewhere elsee..
+    def handle_edge(e: Edge):
+        IS_VALID = True
+        surf_u = Gax.layout.get_surface_by_name(e.u)
+        surf_v = Gax.layout.get_surface_by_name(e.v)
+        cu, cv = surf_u.centroid, surf_v.centroid
+        pc = PairedCoord(cu, cv)
+        line = pc.shapely_line
+        for shape in domain_shapes:
+            if line.crosses(shape):
+                IS_VALID = False
+
+        logger.debug(f"{e.u}:{cu} --- {e.v}:{cv} -- {IS_VALID}")
+        return IS_VALID
+
+    domain_shapes = [i.polygon for i in Gax.layout.domains]
+    # NOTE: MODIFYING IN PLACE -> hopefully not too dangerous
+    # for e in Gax.G.edge_data():
+    #     is_valid = handle_edge(e)
+    invalid_edges = [(e.u, e.v) for e in Gax.G.edge_data() if not handle_edge(e)]
+    logger.info(f"Found invalid_edges: {invalid_edges}")
+
+    Gax.G.remove_edges_from(invalid_edges)
+    return Gax
 
 
 def summarize_graph_list(graphs: list[EdgeDataDiGraph]):
@@ -92,12 +88,8 @@ def summarize_graph_list(graphs: list[EdgeDataDiGraph]):
 def create_move_graph_for_all_surfaces_along_axis(layout: Layout, axis: Axes):
     graphs = create_individual_graphs(layout, axis)
     summarize_graph_list(graphs)
-    # move_graphs = [create_move_graph(layout, g) for g in graphs]
-    # summarize_graph_list(move_graphs)
 
     G = nx.compose_all(graphs)
-    return AxGraph(G, axis, layout)
-
-
-# TODO -> potential for creating a dataclass...
-# graph should return its axis maybe
+    Gax = AxGraph(G, axis, layout)
+    filtered_Gax = filter_intersections(Gax)
+    return filtered_Gax

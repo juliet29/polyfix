@@ -7,7 +7,7 @@ from rich.pretty import pretty_repr
 from utils4plans.geom import InvalidRangeException
 from utils4plans.sets import set_difference
 
-
+from polyfix.geometry.layout import Layout
 from polyfix.geometry.modify.update import Move, update_domain
 from polyfix.geometry.modify.validate import (
     InvalidLayoutError,
@@ -21,9 +21,8 @@ from polyfix.layout.interfaces import (
     EdgeData,
     EdgeDataDiGraph,
 )
-from polyfix.layout.main.plan import compute_delta_between_surfs, create_move_graph
-
-from polyfix.geometry.layout import Layout
+from polyfix.layout.main.create_move import create_move_graph
+from polyfix.layout.main.plan import compute_delta_between_surfs
 
 
 def study_small_change(name: str, l1: Layout, l2: Layout):

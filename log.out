@@ -1,0 +1,31 @@
+INFO     ℹ️:polyfix.layout.main.plan:summarize_graph_list:85 | {} | [                                                                                                                                       
+             {('living_kitchen_hall-east_0', 'closet-west_0'): 323.0},                                                                                                                                     
+             {('living_kitchen_hall-east_0', 'bath_1-west_0'): 8.0},                                                                                                                                       
+             {('living_kitchen_hall-east_2', 'bedroom_1-west_0'): 6.0},                                                                                                                                    
+             {('bath_1-east_0', 'laundry-west_0'): 13.0},                                                                                                                                                  
+             {('bath_1-east_0', 'prim_bath-west_0'): 7.0},                                                                                                                                                 
+             {('prim_bath-east_0', 'prim_bed-west_0'): 14.0},                                                                                                                                              
+             {('laundry-east_0', 'prim_bed-west_0'): 9.0},                                                                                                                                                 
+             {('bedroom_1-east_0', 'bedroom_2-west_0'): 6.0},                                                                                                                                              
+             {('living_kitchen_hall-east_1', 'closet-west_0'): 8.0}                                                                                                                                        
+         ]                                                                                                                                                                                                 
+DEBUG    🐞:polyfix.layout.main.plan:handle_edge:69 | {} | living_kitchen_hall-east_0:(191.00, -288.08) --- closet-west_0:(514.00, -179.50) -- False                                                       
+DEBUG    🐞:polyfix.layout.main.plan:handle_edge:69 | {} | living_kitchen_hall-east_0:(191.00, -288.08) --- bath_1-west_0:(199.00, -291.00) -- True                                                        
+DEBUG    🐞:polyfix.layout.main.plan:handle_edge:69 | {} | living_kitchen_hall-east_2:(257.00, -77.50) --- bedroom_1-west_0:(263.00, -73.50) -- True                                                       
+DEBUG    🐞:polyfix.layout.main.plan:handle_edge:69 | {} | bath_1-east_0:(274.00, -291.00) --- laundry-west_0:(287.00, -237.00) -- True                                                                    
+DEBUG    🐞:polyfix.layout.main.plan:handle_edge:69 | {} | bath_1-east_0:(274.00, -291.00) --- prim_bath-west_0:(281.00, -319.50) -- True                                                                  
+DEBUG    🐞:polyfix.layout.main.plan:handle_edge:69 | {} | prim_bath-east_0:(409.00, -319.50) --- prim_bed-west_0:(423.00, -291.00) -- True                                                                
+DEBUG    🐞:polyfix.layout.main.plan:handle_edge:69 | {} | laundry-east_0:(414.00, -237.00) --- prim_bed-west_0:(423.00, -291.00) -- True                                                                  
+DEBUG    🐞:polyfix.layout.main.plan:handle_edge:69 | {} | bedroom_1-east_0:(445.00, -73.50) --- bedroom_2-west_0:(451.00, -71.00) -- True                                                                 
+DEBUG    🐞:polyfix.layout.main.plan:handle_edge:69 | {} | living_kitchen_hall-east_1:(506.00, -182.58) --- closet-west_0:(514.00, -179.50) -- True                                                        
+INFO     ℹ️:polyfix.layout.main.plan:filter_intersections:77 | {} | Found invalid_edges: [('living_kitchen_hall-east_0', 'closet-west_0')]                                                                  
+INFO     ℹ️:polyfix.layout.viz:collect_node_edges:37 | {} | {                                                                                                                                               
+             ('living_kitchen_hall-east_0', 'bath_1-west_0'): 0,                                                                                                                                           
+             ('living_kitchen_hall-east_2', 'bedroom_1-west_0'): 1,                                                                                                                                        
+             ('bath_1-east_0', 'laundry-west_0'): 2,                                                                                                                                                       
+             ('bath_1-east_0', 'prim_bath-west_0'): 3,                                                                                                                                                     
+             ('prim_bath-east_0', 'prim_bed-west_0'): 4,                                                                                                                                                   
+             ('laundry-east_0', 'prim_bed-west_0'): 5,                                                                                                                                                     
+             ('bedroom_1-east_0', 'bedroom_2-west_0'): 6,                                                                                                                                                  
+             ('living_kitchen_hall-east_1', 'closet-west_0'): 7                                                                                                                                            
+         }                                                                                                                                                                                                 

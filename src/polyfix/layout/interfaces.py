@@ -1,8 +1,10 @@
-import networkx as nx
-from polyfix.geometry.layout import Layout
-from polyfix.geometry.vectors import Axes
 from dataclasses import dataclass
 from typing import NamedTuple
+
+import networkx as nx
+
+from polyfix.geometry.layout import Layout
+from polyfix.geometry.vectors import Axes
 
 GraphPairs = dict[str, list[str]]
 
@@ -41,6 +43,7 @@ class Edge(NamedTuple):
 
 
 class EdgeDataDiGraph(nx.DiGraph):
+    # TODO: should be a property
     def edge_data(self):
         res = list(self.edges(data=True))
         return [Edge(i[0], i[1], i[2]["data"]) for i in res]
