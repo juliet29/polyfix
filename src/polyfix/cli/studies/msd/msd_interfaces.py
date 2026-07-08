@@ -1,7 +1,10 @@
 from typing import Literal
+
 from typing_extensions import NamedTuple
-from polyfix.geometry.ortho import FancyOrthoDomain
+
 from polyfix.geometry.layout import Layout
+from polyfix.geometry.ortho import FancyOrthoDomain
+from polyfix.interfaces import DomainName, NamedDomain
 
 MSD_IDs = Literal[
     "106493",
@@ -34,7 +37,7 @@ class MSDLayout(NamedTuple):
     layout: Layout
 
 
-class MSDDomainName(NamedTuple):
+class MSDDomainName(DomainName):
     layout_id: str | MSD_IDs
     domain_name: str
 
@@ -46,6 +49,6 @@ class MSDDomainName(NamedTuple):
         return self.__repr__()
 
 
-class MSDDomain(NamedTuple):
+class MSDDomain(NamedDomain):
     name: MSDDomainName
     domain: FancyOrthoDomain

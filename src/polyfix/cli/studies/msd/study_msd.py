@@ -12,11 +12,10 @@ from polyfix.bends.main import (
     remove_bends_from_layout,
 )
 from polyfix.bends.utils import make_repr
-from polyfix.examples.msd import (
+from polyfix.cli.studies.msd.msd import get_all_msd_domains, get_msd_layouts_as_objects
+from polyfix.cli.studies.msd.msd_interfaces import (
     MSDDomain,
     MSDDomainName,
-    get_all_msd_domains,
-    get_msd_layouts_as_objects,
 )
 from polyfix.visuals.visuals import plot_domain_with_surfaces, plot_layout_comparison
 

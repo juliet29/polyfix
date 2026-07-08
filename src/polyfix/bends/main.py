@@ -1,20 +1,19 @@
-from polyfix.bends.bends import assign_bends
-from polyfix.msd_interfaces import MSDDomain, MSDDomainName
-from polyfix.geometry.ortho import FancyOrthoDomain
+from copy import deepcopy
 
+from loguru import logger
+
+from polyfix.bends.bends import assign_bends
+from polyfix.bends.errors import DomainCleanFailure, DomainCleanIterationFailure
+from polyfix.bends.points import heal_extra_points_on_domain
 from polyfix.bends.utils import (
     apply_move,
     find_small_surfs,
 )
-from polyfix.bends.points import heal_extra_points_on_domain
-from copy import deepcopy
 from polyfix.bends.viz import DomainMoveDetails, plot_domain_iteration
-from polyfix.geometry.modify.validate import InvalidPolygonError, validate_polygon
-from polyfix.bends.errors import DomainCleanFailure, DomainCleanIterationFailure
-
-from loguru import logger
-
 from polyfix.geometry.layout import Layout
+from polyfix.geometry.modify.validate import InvalidPolygonError, validate_polygon
+from polyfix.geometry.ortho import FancyOrthoDomain
+from polyfix.interfaces import DomainName, NamedDomain
 
 
 def remove_one_bend_from_domain(domain: FancyOrthoDomain, domain_name: str = ""):
@@ -47,7 +46,7 @@ def remove_one_bend_from_domain(domain: FancyOrthoDomain, domain_name: str = "")
 
 
 def remove_all_bends_from_domain(
-    msd_domain: MSDDomain,
+    msd_domain: NamedDomain,
     show_complete_iteration=False,
     show_failure: bool = False,
 ):
@@ -80,7 +79,6 @@ def remove_all_bends_from_domain(
     logger.info(f"[blue italic]Starting iteration for {domain_name}")
     count = 0
     while small_surfs:
-
         if len(domain.surfaces) <= 4:
             break
 
@@ -128,12 +126,12 @@ def remove_all_bends_from_domain(
 def remove_bends_from_layout(layout: Layout, layout_id: str = ""):
     # TODO: do we assume the doms are ortho coming in?
     bad_domains = []
-    non_balconies = list(filter(lambda x: "balcony" not in x.name, layout.domains))
+    # non_balconies = list(filter(lambda x: "balcony" not in x.name, layout.domains))
 
     new_doms = []
     for dom in layout.domains:
         try:
-            msd_dom = MSDDomain(MSDDomainName(layout_id, dom.name), dom)
+            msd_dom = NamedDomain(DomainName(layout_id, dom.name), dom)
             new_dom = remove_all_bends_from_domain(msd_dom)
             new_doms.append(new_dom)
         except DomainCleanIterationFailure as e:

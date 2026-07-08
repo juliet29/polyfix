@@ -6,18 +6,18 @@ from rich.pretty import pretty_repr
 from utils4plans.io import read_json, write_json
 
 from polyfix.bends.main import remove_bends_from_layout
-from polyfix.cli.make.utils import (
-    get_case_name,
-    make_fig_save_path,
-    save_figure,
-    save_layout_figure,
-)
 from polyfix.geometry.modify.precision import decrease_layout_precision
 from polyfix.geometry.modify.validate import InvalidPolygonError
 from polyfix.geometry.vectors import Axes
 from polyfix.layout.main.move import try_moves
 from polyfix.layout.main.plan import create_move_graph_for_all_surfaces_along_axis
 from polyfix.layout.viz import plot_layout_with_graph_info
+from polyfix.main.utils import (
+    get_case_name,
+    make_fig_save_path,
+    save_figure,
+    save_layout_figure,
+)
 from polyfix.nonortho.main import orthogonalize_layout
 from polyfix.pydantic_models import (
     AxGraphModel,

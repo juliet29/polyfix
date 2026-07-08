@@ -2,16 +2,15 @@ from typing import get_args
 
 from utils4plans.lists import chain_flatten
 
-from polyfix.examples.paths import ExamplePaths
-from polyfix.geometry.layout import Layout, create_layout_from_json
-from polyfix.msd_interfaces import (
+from polyfix.cli.studies.msd.msd_interfaces import (
     DEFAULT_MSD,
     MSD_IDs,
     MSDDomain,
     MSDDomainName,
     MSDLayout,
 )
-from polyfix.paths import StaticPaths
+from polyfix.cli.studies.paths import ProjectPaths, StaticPaths
+from polyfix.geometry.layout import Layout, create_layout_from_json
 
 
 def get_oneoff_msd_plan():
@@ -22,7 +21,7 @@ def get_oneoff_msd_plan():
 
 
 def get_all_msd_layouts():
-    source_path = ExamplePaths.MSD_PATHS
+    source_path = ProjectPaths.inputs.msd.basic
     paths = sorted([i for i in source_path.iterdir()])
     layouts = {
         path.stem: create_layout_from_json(path.stem, source_path) for path in paths
@@ -31,7 +30,7 @@ def get_all_msd_layouts():
 
 
 def get_one_msd_layout(id: MSD_IDs | None = None):
-    source_path = ExamplePaths.MSD_PATHS
+    source_path = ProjectPaths.inputs.msd.basic
 
     stems = sorted([i.stem for i in source_path.iterdir()])
 

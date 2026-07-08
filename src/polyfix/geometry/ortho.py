@@ -2,6 +2,7 @@
 from dataclasses import dataclass
 
 import shapely as sp
+from rich import print
 from utils4plans.geom import Coord, OrthoDomain
 from utils4plans.lists import get_unique_one
 
@@ -13,12 +14,10 @@ from polyfix.geometry.vectors import (
     pretty_print_vector,
     vector_from_coords,
 )
-from rich import print
 
 
 @dataclass
 class FancyOrthoDomain(OrthoDomain):
-
     def __eq__(self, other: object) -> bool:
         if isinstance(other, FancyOrthoDomain):
             return (self.coords == other.coords) and (self.name == other.name)
@@ -117,8 +116,10 @@ class FancyOrthoDomain(OrthoDomain):
     def get_surface(self, direction_name: DirectionNames, direction_ix: int = 0):
         return get_unique_one(
             self.surfaces,
-            lambda x: (x.direction.name == direction_name)
-            and (x.direction_ix == direction_ix),
+            lambda x: (
+                (x.direction.name == direction_name)
+                and (x.direction_ix == direction_ix)
+            ),
         )
 
     def get_surface_by_name(self, surf_name: str):
