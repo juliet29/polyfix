@@ -18,15 +18,21 @@ class MSDPaths:
     hard = base / "msd_hard"
 
 
+class SVGPaths:
+    base = StaticPaths.temp / "svgs"
+    ablation_c = base / "ablation_c/init"
+
+
 class Inputs:
     msd = MSDPaths
+    svg = SVGPaths
 
 
 class Temp:
     base = StaticPaths.temp
-    generated = base / "generated"
-    process = base / "process"
-    msd = base / "msd"
+    generated = base / "generated_out"
+    msd = base / "msd_out"
+    svg = base / "svg_out"
 
 
 class ProjectPaths:
