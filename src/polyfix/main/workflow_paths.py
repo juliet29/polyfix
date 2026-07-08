@@ -1,0 +1,39 @@
+from dataclasses import dataclass
+from pathlib import Path
+
+
+@dataclass
+class SingleWorkflowPaths:
+    base: Path
+
+    @property
+    def init(self):
+        return self.base / "init/out.json"
+
+    @property
+    def rotate(self):
+        return self.base / "rotate/out.json"
+
+    @property
+    def ortho(self):
+        return self.base / "ortho/out.json"
+
+    @property
+    def simplify(self):
+        return self.base / "simplify/out.json"
+
+    @property
+    def xplan(self):
+        return self.base / "xplan/out.json"
+
+    @property
+    def xmove(self):
+        return self.base / "xmove/out.json"
+
+    @property
+    def yplan(self):
+        return self.base / "yplan/out.json"
+
+    @property
+    def ymove(self):
+        return self.base / "ymove/out.json"

@@ -33,7 +33,8 @@ dependencies = [
 
 [project.scripts]
 pfx = "polyfix.cli.main:main"
-pfxs = "polyfix.cli.studies.main:main"
+pfxm = "polyfix.cli.make.main:main"
+pfxs = "polyfix.cli.studies.study:main"
 
 [build-system]
 requires = ["uv_build>=0.8.3,<0.9.0"]
