@@ -2,6 +2,7 @@ import re
 from pathlib import Path
 
 from matplotlib.figure import Figure
+from utils4plans.io import save_mpl_fig
 
 from polyfix.geometry.layout import Layout
 from polyfix.visuals.visuals import plot_layout_alone
@@ -24,7 +25,8 @@ def get_path_parent(path: Path):
 
 def save_figure(fig: Figure, path: Path):
     fig.set_layout_engine("constrained")
-    fig.savefig(path, dpi=300)
+    save_mpl_fig(fig, path)
+    # fig.savefig(path, dpi=300)
 
 
 def make_fig_save_path(

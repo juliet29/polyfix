@@ -35,7 +35,7 @@ make_app = App(name="make")
 @make_app.command()
 def rotate(path: Path, out_path: Path):
     in_layout = read_layout_from_path(path)
-    save_layout_figure(in_layout, out_path, "Input", "in")
+    save_layout_figure(in_layout, path, "Input", "in")
 
     angle_radians, layout = rotate_layout(in_layout)
     angle_degrees = math.degrees(angle_radians)
@@ -71,7 +71,7 @@ def simplify(path: Path, out_path: Path):
         )
     layout = decrease_layout_precision(layout)
     save_layout_figure(layout, out_path, "Simplified", show_surfaces_labels=True)
-    write_json(layout_to_model(layout).model_dump(), out_path, OVERWRITE=True)
+    write_json(layout_to_model(layout).model_dump(), out_path)
 
 
 @make_app.command()
@@ -82,10 +82,13 @@ def plan(ax: Axes, path: Path, out_path: Path):
     fig, _ = plot_layout_with_graph_info(
         Gax, f"{get_case_name(path)} {ax}-Plan", show=False
     )
-    save_figure(fig, make_fig_save_path(path))
+    save_figure(fig, make_fig_save_path(out_path))
 
     Gax_model = axgraph_to_model(Gax)
-    write_json(Gax_model.model_dump(), out_path, OVERWRITE=True)
+    write_json(
+        Gax_model.model_dump(),
+        out_path,
+    )
 
 
 @make_app.command()
