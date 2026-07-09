@@ -39,7 +39,7 @@ def trial_move(path: Path):
 
 
 def main():
-    logset(to_stderr=True)
+    logset(to_stderr=False)
     app()
 
 

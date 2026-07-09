@@ -1109,7 +1109,7 @@ dependencies = [
     { name = "snakemake" },
     { name = "tomli-w" },
     { name = "types-networkx" },
-    { name = "utils4plans" },
+    { name = "utils4plans", extra = ["figures", "yaml"] },
     { name = "whenever" },
 ]
 
@@ -1134,7 +1134,7 @@ requires-dist = [
     { name = "snakemake", specifier = ">=9.14.5" },
     { name = "tomli-w", specifier = ">=1.2.0" },
     { name = "types-networkx", specifier = ">=3.5.0.20251106" },
-    { name = "utils4plans", editable = "../utils4plans" },
+    { name = "utils4plans", extras = ["figures", "yaml"], editable = "../utils4plans" },
     { name = "whenever", specifier = ">=0.9.3" },
 ]
 
@@ -1856,29 +1856,38 @@ source = { editable = "../utils4plans" }
 dependencies = [
     { name = "expression" },
     { name = "loguru" },
-    { name = "matplotlib" },
     { name = "networkx" },
     { name = "numpy" },
     { name = "pydantic" },
     { name = "pytest" },
     { name = "rich" },
-    { name = "seaborn" },
     { name = "tomli-w" },
+]
+
+[package.optional-dependencies]
+figures = [
+    { name = "matplotlib" },
+    { name = "seaborn" },
+]
+yaml = [
+    { name = "pyyaml" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "expression", specifier = ">=5.6.0" },
     { name = "loguru", specifier = ">=0.7.3" },
-    { name = "matplotlib", specifier = ">=3.11.0" },
+    { name = "matplotlib", marker = "extra == 'figures'", specifier = ">=3.11.0" },
     { name = "networkx", specifier = ">=3.5" },
     { name = "numpy", specifier = ">=2.3.2" },
     { name = "pydantic", specifier = ">=2.13.3" },
     { name = "pytest", specifier = ">=8.4.1" },
+    { name = "pyyaml", marker = "extra == 'yaml'", specifier = ">=6.0" },
     { name = "rich", specifier = ">=14.1.0" },
-    { name = "seaborn", specifier = ">=0.13.2" },
+    { name = "seaborn", marker = "extra == 'figures'", specifier = ">=0.13.2" },
     { name = "tomli-w", specifier = ">=1.2.0" },
 ]
+provides-extras = ["figures", "yaml"]
 
 [[package]]
 name = "virtualenv"

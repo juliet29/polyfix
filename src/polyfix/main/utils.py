@@ -2,7 +2,7 @@ import re
 from pathlib import Path
 
 from matplotlib.figure import Figure
-from utils4plans.io import save_mpl_fig
+from utils4plans.io.extras.figures import save_mpl_fig
 
 from polyfix.geometry.layout import Layout
 from polyfix.visuals.visuals import plot_layout_alone

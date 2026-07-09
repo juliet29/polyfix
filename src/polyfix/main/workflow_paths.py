@@ -37,3 +37,10 @@ class SingleWorkflowPaths:
     @property
     def ymove(self):
         return self.base / "ymove/out.json"
+
+    ## take 2: -----------
+    def xplan_i(self, i: int = 1):
+        return self.base / f"xplan_{i}/out.json"
+
+    def yplan_i(self, i: int = 1):
+        return self.base / f"yplan_{i}/out.json"

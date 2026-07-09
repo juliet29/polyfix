@@ -82,6 +82,7 @@ def plan(ax: Axes, path: Path, out_path: Path):
         Gax_model.model_dump(),
         out_path,
     )
+    return Gax
 
 
 def move(ax: Axes, path: Path, out_path: Path):
