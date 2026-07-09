@@ -154,12 +154,5 @@ DEBUG    🐞:polyfix.layout.main.move:try_moves:133 | {} | Moving closet-north_
 TRACE    ✏️:polyfix.layout.main.move:study_polygon_changes:43 | {} | closet has changed!                                                                                                                    
 SUCCESS  ✅:polyfix.geometry.modify.validate:validate_layout_overlaps:173 | {} | No overlaps in the layout                                                                                                 
 SUCCESS  ✅:polyfix.geometry.modify.validate:validate_layout_overlaps:173 | {} | No overlaps in the layout                                                                                                 
-DEBUG    🐞:polyfix.cli.studies.svgs.main:fc:66 | {} | {                                                                                                                                                   
-             'living_kitchen_hall': ['closet', 'bedroom_2'],                                                                                                                                               
-             'bath_1': ['laundry', 'prim_bath', 'living_kitchen_hall'],                                                                                                                                    
-             'prim_bath': ['prim_bed', 'laundry'],                                                                                                                                                         
-             'laundry': ['prim_bed', 'living_kitchen_hall'],                                                                                                                                               
-             'bedroom_1': ['bedroom_2'],                                                                                                                                                                   
-             'prim_bed': ['living_kitchen_hall'],                                                                                                                                                          
-             'closet': ['bedroom_2']                                                                                                                                                                       
-         }                                                                                                                                                                                                 
+DEBUG    🐞:polyfix.cli.studies.svgs.main:fc:27 | {} | {'living_kitchen_hall': ['closet', 'bedroom_2'], 'bath_1': ['laundry', 'prim_bath', 'living_kitchen_hall'], 'prim_bath': ['prim_bed', 'laundry'],   
+         'laundry': ['prim_bed', 'living_kitchen_hall'], 'bedroom_1': ['bedroom_2'], 'prim_bed': ['living_kitchen_hall'], 'closet': ['bedroom_2']}                                                         

@@ -4,7 +4,9 @@ from pathlib import Path
 from loguru import logger
 from rich.pretty import pretty_repr
 from utils4plans.io import read_json, write_json
+from utils4plans.io.file_types import write_yaml
 
+from polyfix.adjacencies.zonal import capture_zone_adjacencies
 from polyfix.bends.main import remove_bends_from_layout
 from polyfix.geometry.modify.precision import decrease_layout_precision
 from polyfix.geometry.modify.validate import InvalidPolygonError
@@ -90,3 +92,15 @@ def move(ax: Axes, path: Path, out_path: Path):
     layout = try_moves(Gax)
     save_layout_figure(layout, out_path, title=f"{ax}-Move")
     write_layout(layout, out_path)
+
+
+def save_adjacencies(x_path: Path, y_path: Path, out_path: Path):
+    """
+    out_path: should end in .yaml => writing a .yaml file
+    """
+    pass
+
+    Gax = AxGraphModel.model_validate(read_json(x_path)).to_axgraph()
+    Gay = AxGraphModel.model_validate(read_json(y_path)).to_axgraph()
+    adj = capture_zone_adjacencies(Gax, Gay)
+    write_yaml(adj, out_path)

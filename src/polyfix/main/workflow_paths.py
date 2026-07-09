@@ -38,6 +38,10 @@ class SingleWorkflowPaths:
     def ymove(self):
         return self.base / "ymove/out.json"
 
+    @property
+    def adjacencies(self):
+        return self.base / "out.adj.yaml"
+
     ## take 2: -----------
     def xplan_i(self, i: int = 1):
         return self.base / f"xplan_{i}/out.json"
