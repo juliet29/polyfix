@@ -39,6 +39,10 @@ class SingleWorkflowPaths:
         return self.base / "ymove/out.json"
 
     @property
+    def reconcile(self):
+        return self.base / "reconcile/out.json"
+
+    @property
     def adjacencies(self):
         return self.base / "out.adj.yaml"
 

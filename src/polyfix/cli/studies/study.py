@@ -15,6 +15,7 @@ from polyfix.pydantic_models import AxGraphModel, write_layout
 
 app = App()
 app.command(svg)
+app.command(ly)
 
 
 @app.command()

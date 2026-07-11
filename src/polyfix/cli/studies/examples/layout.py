@@ -40,4 +40,13 @@ smart_graph_example: dict[str, CoordsType] = {
     "C": gen_square((4, 1.5), 1),
 }
 
-example_layouts = [layout_coords, smart_graph_example]
+# Partial-overlap gap after y-move: `wide`'s north wall (x 0->4 @ y=2) faces
+# `narrow`'s south wall (x 1->3 @ y=2.05) across a 0.05 gap. Because wide.north
+# overhangs the overlap (0->1 and 3->4 stick out), closing the gap correctly
+# requires splitting wide.north at x=1,3 and moving only the middle segment.
+split_gap_example: dict[str, CoordsType] = {
+    "wide": [(0, 0), (4, 0), (4, 2), (0, 2)],
+    "narrow": [(1, 2.05), (3, 2.05), (3, 4), (1, 4)],
+}
+
+example_layouts = [layout_coords, smart_graph_example, split_gap_example]

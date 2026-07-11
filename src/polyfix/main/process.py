@@ -4,7 +4,7 @@ from pathlib import Path
 from loguru import logger
 from rich.pretty import pretty_repr
 from utils4plans.io import read_json, write_json
-from utils4plans.io.file_types import write_yaml
+from utils4plans.io.extras.yaml import write_yaml
 
 from polyfix.adjacencies.zonal import capture_zone_adjacencies
 from polyfix.bends.main import remove_bends_from_layout
@@ -21,6 +21,7 @@ from polyfix.main.utils import (
     save_layout_figure,
 )
 from polyfix.nonortho.main import orthogonalize_layout
+from polyfix.reconcile.close_gaps import close_gaps
 from polyfix.pydantic_models import (
     AxGraphModel,
     axgraph_to_model,
@@ -91,6 +92,13 @@ def move(ax: Axes, path: Path, out_path: Path):
     Gax = AxGraphModel.model_validate(read_json(path)).to_axgraph()
     layout = try_moves(Gax)
     save_layout_figure(layout, out_path, title=f"{ax}-Move")
+    write_layout(layout, out_path)
+
+
+def reconcile(path: Path, out_path: Path):
+    in_layout = read_layout_from_path(path)
+    layout = close_gaps(in_layout)
+    save_layout_figure(layout, out_path, title="Reconciled")
     write_layout(layout, out_path)
 
 

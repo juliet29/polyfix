@@ -22,6 +22,7 @@ dependencies = [
   "pydantic>=2.12.5",
   "pyprojroot>=0.3.0",
   "pytest>=8.4.2",
+  "scipy>=1.14",  # networkx.graph_edit_distance backend (reconcile metrics)
   "pytest-cov>=7.0.0",
   "shapely>=2.1.2",
   "snakemake>=9.14.5",

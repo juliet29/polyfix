@@ -1,6 +1,14 @@
 from pathlib import Path
 
-from polyfix.main.process import move, ortho, plan, rotate, save_adjacencies, simplify
+from polyfix.main.process import (
+    move,
+    ortho,
+    plan,
+    reconcile,
+    rotate,
+    save_adjacencies,
+    simplify,
+)
 from polyfix.main.workflow_paths import SingleWorkflowPaths
 
 
@@ -15,6 +23,7 @@ def execute_polyfix(output_path: Path, save_adj: bool = False):
 
     plan("Y", paths.xmove, paths.yplan)
     move("Y", paths.yplan, paths.ymove)
+    reconcile(paths.ymove, paths.reconcile)
 
     if save_adj:
         save_adjacencies(paths.xplan, paths.yplan, paths.adjacencies)
